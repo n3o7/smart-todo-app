@@ -1,29 +1,23 @@
 const toDoList = [];
- function addToDo(textFieldName,divName){
-      const taskToDo = document.querySelector(  `.${textFieldName}`);
-       
-      toDoList.push(taskToDo.value);
-      console.log(toDoList);
-
-      taskToDo.value = '';
-      renderTodoList(divName);
+ function addToDo(){
+      const taskToDo = document.querySelector('.final-todo-name');
+      const dateOfTask = document.querySelector('.js-date');
+      if(taskToDo.value){
+        toDoList.push(taskToDo.value);
+        taskToDo.value = '';
+        dateOfTask.value='';
+        renderTodoList();
+      }else{
+        alert('You didnt enter a value');
+      }
     }
    
-    function renderTodoList(divName){
+    function renderTodoList(){
       let toDoListHTML='';
       let html;
       for (let i=0;i < toDoList.length; i++)
       {
-        const todo = toDoList[i];
-        if(divName === 'js-todo-list'){
-          html = 
-        `<p>
-          ${todo} 
-          <button onclick="
-          toDoList.splice(${i},1);
-          renderTodoList('${divName}');">Delete</button>
-        </p>`;
-        }else{
+          const todo = toDoList[i];
           const date = document.querySelector('.js-date').value;
           html = 
         `<p>
@@ -31,14 +25,11 @@ const toDoList = [];
           ${date}
           <button onclick="
           toDoList.splice(${i},1);
-          renderTodoList('${divName}');">Delete</button>
+          renderTodoList('');">Delete</button>
         </p>`;
-        };
-        
         toDoListHTML+=html;
       }
-      console.log(toDoListHTML);
-        document.querySelector(`.${divName}`).innerHTML = toDoListHTML;
+      document.querySelector(`.final-todo-list`).innerHTML = toDoListHTML;
     }
 
     
