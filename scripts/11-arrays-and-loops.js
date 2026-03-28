@@ -1,37 +1,49 @@
-const toDoList = [];
+const toDoList = JSON.parse(localStorage.getItem('toDoList')) || [];
+renderTodoList();
  function addToDo(){
       const taskToDo = document.querySelector('.final-todo-name');
       const dateOfTask = document.querySelector('.js-date');
-      if(taskToDo.value){
-        toDoList.push(taskToDo.value);
+      if (!taskToDo.value && !dateOfTask.value) {
+        alert('Enter task name and choose date');
+      } else if (!taskToDo.value) {
+        alert('Enter task name');
+      } else if (!dateOfTask.value) {
+        alert('Choose date');
+      }else{
+        toDoList.push({
+        name: taskToDo.value,
+        dueDate: dateOfTask.value
+        });
+        localStorage.setItem('toDoList', JSON.stringify(toDoList));
         taskToDo.value = '';
         dateOfTask.value='';
         renderTodoList();
-      }else{
-        alert('You didnt enter a value');
-      }
-    }
+      };
+  };
    
     function renderTodoList(){
       let toDoListHTML='';
-      let html;
       for (let i=0;i < toDoList.length; i++)
       {
-          const todo = toDoList[i];
-          const date = document.querySelector('.js-date').value;
-          html = 
+        const todoObject = toDoList[i];
+        const name = todoObject.name;
+        const dueDate = todoObject.dueDate;
+        const html = 
         `<p>
-          ${todo}
-          ${date}
+          ${name}
+          ${dueDate}
           <button onclick="
-          toDoList.splice(${i},1);
-          renderTodoList('');">Delete</button>
+          deleteTodo(${i});">Delete</button>
         </p>`;
         toDoListHTML+=html;
       }
       document.querySelector(`.final-todo-list`).innerHTML = toDoListHTML;
     }
-
+      function deleteTodo(index) {
+      toDoList.splice(index, 1);
+      localStorage.setItem('toDoList', JSON.stringify(toDoList));
+      renderTodoList();
+    }
     
 
 
