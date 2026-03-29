@@ -1,4 +1,5 @@
 const toDoList = JSON.parse(localStorage.getItem('toDoList')) || [];
+let currentFilter = 'all';
 renderTodoList();
  function addToDo(){
       const taskToDo = document.querySelector('.final-todo-name');
@@ -23,11 +24,19 @@ renderTodoList();
    
     function renderTodoList(){
       let toDoListHTML='';
+      const today = new Date().toISOString().split('T')[0];
       for (let i=0;i < toDoList.length; i++)
       {
         const todoObject = toDoList[i];
         const name = todoObject.name;
         const dueDate = todoObject.dueDate;
+        if (currentFilter === 'today' && dueDate !== today) {
+          continue;
+        }
+
+        if (currentFilter === 'upcoming' && dueDate <= today) {
+          continue;
+        }
         const html = 
         `<p>
           ${name}
@@ -44,18 +53,9 @@ renderTodoList();
       localStorage.setItem('toDoList', JSON.stringify(toDoList));
       renderTodoList();
     }
-    function filterToday(){
-      const newArray=[];
-      for(let i=0;i<toDoList.length;i++){
-        const today = new Date().toISOString().split('T')[0];
-        if(toDoList[i].dueDate === today){
-        newArray.push(toDoList[i]);
-      };
-    };
-    renderFilteredList(newArray);
-  }
+   
 
-  function renderFilteredList(list) {
+  /*function renderFilteredList(list) {
   let html = '';
   for (let i = 0; i < list.length; i++) {
     const todo = list[i];
@@ -63,6 +63,7 @@ renderTodoList();
     html += `
       <p>
         ${todo.name} ${todo.dueDate}
+        <button onclick="
       </p>
     `;
   };
@@ -78,6 +79,31 @@ function filterUpcoming(){
     }
   }
   renderFilteredList(newArray);
+}
+ function filterToday(){
+      const newArray=[];
+      for(let i=0;i<toDoList.length;i++){
+        const today = new Date().toISOString().split('T')[0];
+        if(toDoList[i].dueDate === today){
+        newArray.push(toDoList[i]);
+      };
+    };
+    renderTodoList();
+  }
+*/
+function showAll() {
+  currentFilter = 'all';
+  renderTodoList();
+}
+
+function filterToday() {
+  currentFilter = 'today';
+  renderTodoList();
+}
+
+function filterUpcoming() {
+  currentFilter = 'upcoming';
+  renderTodoList();
 }
 
      
