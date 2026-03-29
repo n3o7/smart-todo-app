@@ -44,7 +44,40 @@ renderTodoList();
       localStorage.setItem('toDoList', JSON.stringify(toDoList));
       renderTodoList();
     }
-    
+    function filterToday(){
+      const newArray=[];
+      for(let i=0;i<toDoList.length;i++){
+        const today = new Date().toISOString().split('T')[0];
+        if(toDoList[i].dueDate === today){
+        newArray.push(toDoList[i]);
+      };
+    };
+    renderFilteredList(newArray);
+  }
 
+  function renderFilteredList(list) {
+  let html = '';
+  for (let i = 0; i < list.length; i++) {
+    const todo = list[i];
+
+    html += `
+      <p>
+        ${todo.name} ${todo.dueDate}
+      </p>
+    `;
+  };
+  document.querySelector('.final-todo-list').innerHTML = html;
+};
+  
+function filterUpcoming(){
+  const today = new Date().toISOString().split('T')[0];
+  const newArray=[];
+  for(let i=0;i<toDoList.length;i++){
+    if(toDoList[i].dueDate > today){
+      newArray.push(toDoList[i]);
+    }
+  }
+  renderFilteredList(newArray);
+}
 
      
