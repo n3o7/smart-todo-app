@@ -56,7 +56,6 @@ body{
 .input-text-box {
   flex: 1 1 260px;
 }
-
 .date-text-box {
   flex: 1 1 180px;
 }
@@ -108,7 +107,6 @@ body{
   color: #111827;
   font-weight: 500;
 }
-
 .todo-date-text {
   margin-top:4px;
   font-size: 14px;
@@ -145,7 +143,6 @@ body{
 .delete-button {
   transition: 0.2s;
 }
-
 .delete-button:hover {
   background-color: #fee2e2;
 }

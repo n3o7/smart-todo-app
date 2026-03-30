@@ -3,7 +3,9 @@ let currentFilter = 'all';
 const allButton = document.querySelector('.allFilterButton');
 const todayButton = document.querySelector('.todayFilterButton');
 const upcomingButton = document.querySelector('.upcomingFilterButton');
+
 renderTodoList();
+
  function addToDo(){
   const taskToDo = document.querySelector('.final-todo-name');
   const dateOfTask = document.querySelector('.js-date');
@@ -42,16 +44,16 @@ renderTodoList();
         }
         const html = 
         `
-         <div class="todo-item">
+        <div class="todo-item">
     
-        <div class="todo-info">
-          <div class="todo-name">${name}</div>
-          <div class="todo-date-text">Due:${dueDate}</div>
-        </div>
+          <div class="todo-info">
+            <div class="todo-name">${name}</div>
+            <div class="todo-date-text">Due:${dueDate}</div>
+          </div>
 
-        <button class="delete-button" onclick="deleteTodo(${i})">
-          Delete
-        </button>
+          <button class="delete-button" onclick="deleteTodo(${i})">
+            Delete
+          </button>
 
         </div>
           `;
@@ -59,33 +61,35 @@ renderTodoList();
       }
       document.querySelector(`.final-todo-list`).innerHTML = toDoListHTML;
     }
-      function deleteTodo(index) {
+
+    function deleteTodo(index) {
       toDoList.splice(index, 1);
       localStorage.setItem('toDoList', JSON.stringify(toDoList));
       renderTodoList();
     }
-function showAll() {
-  todayButton.classList.remove("active");
-  upcomingButton.classList.remove("active");
-  allButton.classList.add("active");
-  currentFilter = 'all';
-  renderTodoList();
-}
 
-function filterToday() {
-  allButton.classList.remove("active");
-  upcomingButton.classList.remove("active");
-  todayButton.classList.add("active");
-  currentFilter = 'today';
-  renderTodoList();
-}
+    function showAll() {
+      todayButton.classList.remove("active");
+      upcomingButton.classList.remove("active");
+      allButton.classList.add("active");
+      currentFilter = 'all';
+      renderTodoList();
+    }
 
-function filterUpcoming() {
-  allButton.classList.remove('active');
-  todayButton.classList.remove('active');
-  upcomingButton.classList.add('active');
-  currentFilter = 'upcoming';
-  renderTodoList();
-}
+    function filterToday() {
+      allButton.classList.remove("active");
+      upcomingButton.classList.remove("active");
+      todayButton.classList.add("active");
+      currentFilter = 'today';
+      renderTodoList();
+    }
+
+    function filterUpcoming() {
+      allButton.classList.remove('active');
+      todayButton.classList.remove('active');
+      upcomingButton.classList.add('active');
+      currentFilter = 'upcoming';
+      renderTodoList();
+    }
 
      
