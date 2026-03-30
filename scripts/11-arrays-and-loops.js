@@ -41,12 +41,20 @@ renderTodoList();
           continue;
         }
         const html = 
-        `<p>
-          ${name}
-          ${dueDate}
-          <button onclick="
-          deleteTodo(${i});">Delete</button>
-        </p>`;
+        `
+         <div class="todo-item">
+    
+        <div class="todo-info">
+          <div class="todo-name">${name}</div>
+          <div class="todo-date-text">Due:${dueDate}</div>
+        </div>
+
+        <button class="delete-button" onclick="deleteTodo(${i})">
+          Delete
+        </button>
+
+        </div>
+          `;
         toDoListHTML+=html;
       }
       document.querySelector(`.final-todo-list`).innerHTML = toDoListHTML;
