@@ -1,6 +1,7 @@
-.active {
-  background-color: black;
-  color:white;
+.filter-button.active {
+  background-color: #eff6ff;
+  color: #2563eb;
+  border-color: #bfdbfe;
 }
 body{
   margin:0;
@@ -82,6 +83,10 @@ body{
   background-color: white;
   color: #1f2937;
   cursor: pointer;
+  transition: 0.2s;
+}
+.filter-button:hover{
+  background-color: #f3f4f6;
 }
 .final-todo-list {
   display: flex;
@@ -99,14 +104,15 @@ body{
   background-color: #ffffff;
 }
 .todo-name {
-  font-size: 18px;
+  font-size: 20x;
   color: #111827;
   font-weight: 500;
 }
 
 .todo-date-text {
+  margin-top:4px;
   font-size: 14px;
-  color: gray;
+  color: #6b7280;
 }
 .delete-button{
   padding: 10px 16px;
@@ -115,4 +121,31 @@ body{
   background-color: #fff5f5;
   color: #c24141;
   cursor: pointer;
+}
+.input-text-box:focus,
+.date-text-box:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+.add-button:focus,
+.delete-button:focus,
+.filter-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+.add-button {
+  transition: 0.2s;
+}
+
+.add-button:hover {
+  background-color: #1d4ed8;
+}
+
+.delete-button {
+  transition: 0.2s;
+}
+
+.delete-button:hover {
+  background-color: #fee2e2;
 }
