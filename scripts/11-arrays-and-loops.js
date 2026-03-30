@@ -3,12 +3,12 @@ let currentFilter = 'all';
 const allButton = document.querySelector('.allFilterButton');
 const todayButton = document.querySelector('.todayFilterButton');
 const upcomingButton = document.querySelector('.upcomingFilterButton');
-
-renderTodoList();
+const finalToDoList = document.querySelector('.final-todo-list');
+const taskToDo = document.querySelector('.final-todo-name');
+const dateOfTask = document.querySelector('.js-date');
+showFilter('all');
 
  function addToDo(){
-  const taskToDo = document.querySelector('.final-todo-name');
-  const dateOfTask = document.querySelector('.js-date');
   if (!taskToDo.value && !dateOfTask.value) {
     alert('Enter task name and choose date');
   } else if (!taskToDo.value) {
@@ -24,8 +24,8 @@ renderTodoList();
      taskToDo.value = '';
      dateOfTask.value='';
      renderTodoList();
-    };
-  };
+    }
+  }
    
     function renderTodoList(){
       let toDoListHTML='';
@@ -59,7 +59,7 @@ renderTodoList();
           `;
         toDoListHTML+=html;
       }
-      document.querySelector(`.final-todo-list`).innerHTML = toDoListHTML;
+      finalToDoList.innerHTML = toDoListHTML;
     }
 
     function deleteTodo(index) {
@@ -67,7 +67,7 @@ renderTodoList();
       localStorage.setItem('toDoList', JSON.stringify(toDoList));
       renderTodoList();
     }
-
+/*
     function showAll() {
       todayButton.classList.remove("active");
       upcomingButton.classList.remove("active");
@@ -90,6 +90,25 @@ renderTodoList();
       upcomingButton.classList.add('active');
       currentFilter = 'upcoming';
       renderTodoList();
+    }
+      */
+    function showFilter(filterName){
+      allButton.classList.remove('active');
+      todayButton.classList.remove('active');
+      upcomingButton.classList.remove("active");
+      if(filterName === 'all')
+        {
+          allButton.classList.add('active');
+          currentFilter = 'all';
+        }else if(filterName === 'today')
+        {
+          todayButton.classList.add("active");
+          currentFilter = 'today';
+        }else{
+          upcomingButton.classList.add('active');
+          currentFilter = 'upcoming';
+        }
+        renderTodoList();
     }
 
      
